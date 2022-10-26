@@ -34,59 +34,38 @@ function RocketLookup({ rockets }: RocketLookupProps) {
   const [filters, setFilters] = React.useState<RocketFilterState>({});
   const [sortOrder, setSortOrder] =
     React.useState<RocketSortState>(INITIAL_SORT_STATE);
-  const filteredRockets = filterRockets(rockets, filters);
-  const sortedRockets = sortRockets(filteredRockets, sortOrder);
+  const filteredRockets = React.useMemo(
+    () => filterRockets(rockets, filters),
+    [rockets, filters]
+  );
+  const sortedRockets = React.useMemo(
+    () => sortRockets(filteredRockets, sortOrder),
+    [filteredRockets, sortOrder]
+  );
 
-  const toggleActiveRockets = () => {
+  const updateFilterState = (rocketFilter: RocketFilter) => {
     setFilters((previousFilters) => {
-      if (filters.ACTIVE) {
+      if (filters[rocketFilter]) {
         const updatedFilters = { ...previousFilters };
-        delete updatedFilters[RocketFilter.ACTIVE];
+        delete updatedFilters[rocketFilter];
         return updatedFilters;
       }
       return {
         ...previousFilters,
-        [RocketFilter.ACTIVE]: true,
-      };
-    });
-  };
-  const toggleMerlinRockets = () => {
-    setFilters((previousFilters) => {
-      if (filters.MERLIN_ENGINES) {
-        const updatedFilters = { ...previousFilters };
-        delete updatedFilters[RocketFilter.MERLIN_ENGINES];
-        return updatedFilters;
-      }
-      return {
-        ...previousFilters,
-        [RocketFilter.MERLIN_ENGINES]: true,
+        [rocketFilter]: true,
       };
     });
   };
 
-  const sortByCostPerLaunch = () => {
+  const updateSortState = (sortAttribute: SortAttribute) => {
     setSortOrder((previousSortOrder) => {
       const { order, attribute } = previousSortOrder;
       return {
         order:
-          order === SortOrder.ASCENDING && attribute === SortAttribute.COST
+          order === SortOrder.ASCENDING && attribute === sortAttribute
             ? SortOrder.DESCENDING
             : SortOrder.ASCENDING,
-        attribute: SortAttribute.COST,
-      };
-    });
-  };
-
-  const sortByNumberOfEngines = () => {
-    setSortOrder((previousSortOrder) => {
-      const { order, attribute } = previousSortOrder;
-      return {
-        order:
-          order === SortOrder.ASCENDING &&
-          attribute === SortAttribute.NUMBER_OF_ENGINES
-            ? SortOrder.DESCENDING
-            : SortOrder.ASCENDING,
-        attribute: SortAttribute.NUMBER_OF_ENGINES,
+        attribute: sortAttribute,
       };
     });
   };
@@ -94,13 +73,14 @@ function RocketLookup({ rockets }: RocketLookupProps) {
   const clearFilters = () => setFilters({});
   const resetSortOrder = () => setSortOrder(INITIAL_SORT_STATE);
 
-  console.log({ filters });
-  console.log({ sortOrder });
-
   return (
     <>
       <Box
-        sx={{ mb: 3, display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)' }}
+        sx={{
+          mb: 3,
+          display: 'grid',
+          gridTemplateColumns: 'repeat(2, 1fr)',
+        }}
       >
         <Box>
           <Chip
@@ -108,14 +88,14 @@ function RocketLookup({ rockets }: RocketLookupProps) {
             color="success"
             label={'Filter Active Rockets'}
             variant={filters.ACTIVE ? 'filled' : 'outlined'}
-            onClick={toggleActiveRockets}
+            onClick={() => updateFilterState(RocketFilter.ACTIVE)}
           />
           <Chip
             icon={<FilterListRounded />}
             color="success"
             label={'Filter Merlin Engines'}
             variant={filters.MERLIN_ENGINES ? 'filled' : 'outlined'}
-            onClick={toggleMerlinRockets}
+            onClick={() => updateFilterState(RocketFilter.MERLIN_ENGINES)}
           />
           {!isEmpty(filters) ? (
             <Chip
@@ -141,7 +121,7 @@ function RocketLookup({ rockets }: RocketLookupProps) {
                 ? 'contained'
                 : 'outlined'
             }
-            onClick={sortByCostPerLaunch}
+            onClick={() => updateSortState(SortAttribute.COST)}
           >
             Cost Per Launch
           </Button>
@@ -160,13 +140,15 @@ function RocketLookup({ rockets }: RocketLookupProps) {
                 ? 'contained'
                 : 'outlined'
             }
-            onClick={sortByNumberOfEngines}
+            onClick={() => updateSortState(SortAttribute.NUMBER_OF_ENGINES)}
           >
             # of Engines
           </Button>
-          <Button startIcon={<RestartAltRounded />} onClick={resetSortOrder}>
-            Reset Sort Order
-          </Button>
+          {sortOrder.attribute !== INITIAL_SORT_STATE.attribute ? (
+            <Button startIcon={<RestartAltRounded />} onClick={resetSortOrder}>
+              Reset Sort Order
+            </Button>
+          ) : null}
         </Box>
       </Box>
       <Divider />

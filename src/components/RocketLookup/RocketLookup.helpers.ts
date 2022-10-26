@@ -10,7 +10,6 @@ export type RocketFilterState = {
 };
 
 export function filterRockets(rockets: Rocket[], filters: RocketFilterState) {
-  console.log('### Called filterRockets');
   if (isEmpty(filters)) {
     return rockets;
   }
@@ -44,7 +43,6 @@ export interface RocketSortState {
 }
 
 export function sortRockets(rockets: Rocket[], sortOrder: RocketSortState) {
-  console.log('### Called sortRockets');
   return [...rockets].sort((rocket1, rocket2) => {
     if (sortOrder.order === SortOrder.ASCENDING) {
       switch (sortOrder.attribute) {
