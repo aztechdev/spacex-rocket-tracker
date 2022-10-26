@@ -74,7 +74,7 @@ function RocketLookup({ rockets }: RocketLookupProps) {
   const resetSortOrder = () => setSortOrder(INITIAL_SORT_STATE);
 
   return (
-    <>
+    <Box mb={2}>
       <Box display={'grid'} mb={1} p={1} gridTemplateColumns={'1fr'}>
         <Box mx={'auto'} mb={1}>
           <Chip
@@ -180,7 +180,7 @@ function RocketLookup({ rockets }: RocketLookupProps) {
           <RocketInfo rocket={rocket} key={rocket.id} />
         ))}
       </Box>
-    </>
+    </Box>
   );
 }
 
