@@ -24,8 +24,14 @@ const renderRocketLookupUI = (
 function App() {
   const { loading, error, data } = useQuery<RocketData>(ROCKETS_QUERY);
   return (
-    <Container>
-      <Typography variant="h1" align="center" gutterBottom={true}>
+    <Container maxWidth={'lg'}>
+      <Typography
+        variant="h1"
+        align="center"
+        gutterBottom={true}
+        fontWeight={'700'}
+        letterSpacing={2}
+      >
         SpaceX Rocket Lookup
       </Typography>
       {renderRocketLookupUI(loading, error, data)}

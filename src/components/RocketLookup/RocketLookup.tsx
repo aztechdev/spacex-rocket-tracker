@@ -75,14 +75,8 @@ function RocketLookup({ rockets }: RocketLookupProps) {
 
   return (
     <>
-      <Box
-        sx={{
-          mb: 3,
-          display: 'grid',
-          gridTemplateColumns: 'repeat(2, 1fr)',
-        }}
-      >
-        <Box>
+      <Box display={'grid'} mb={1} p={1} gridTemplateColumns={'1fr'}>
+        <Box mx={'auto'} mb={1}>
           <Chip
             icon={<FilterListRounded />}
             color="success"
@@ -90,7 +84,7 @@ function RocketLookup({ rockets }: RocketLookupProps) {
             variant={filters.ACTIVE ? 'filled' : 'outlined'}
             onClick={() => updateFilterState(RocketFilter.ACTIVE)}
             sx={{
-              mx: 1,
+              m: 1,
             }}
           />
           <Chip
@@ -100,7 +94,7 @@ function RocketLookup({ rockets }: RocketLookupProps) {
             variant={filters.MERLIN_ENGINES ? 'filled' : 'outlined'}
             onClick={() => updateFilterState(RocketFilter.MERLIN_ENGINES)}
             sx={{
-              mx: 1,
+              m: 1,
             }}
           />
           {!isEmpty(filters) ? (
@@ -109,12 +103,13 @@ function RocketLookup({ rockets }: RocketLookupProps) {
               label={'Clear All Filters'}
               onClick={clearFilters}
               sx={{
-                mx: 1,
+                m: 1,
               }}
             />
           ) : null}
         </Box>
-        <Box>
+        <Divider />
+        <Box display={'flex'} justifyContent={'flex-end'} mt={1}>
           <Button
             startIcon={<SortRounded />}
             endIcon={
@@ -132,7 +127,7 @@ function RocketLookup({ rockets }: RocketLookupProps) {
             }
             onClick={() => updateSortState(SortAttribute.COST)}
             sx={{
-              mx: 1,
+              m: 1,
             }}
           >
             Cost Per Launch
@@ -154,30 +149,35 @@ function RocketLookup({ rockets }: RocketLookupProps) {
             }
             onClick={() => updateSortState(SortAttribute.NUMBER_OF_ENGINES)}
             sx={{
-              mx: 1,
+              m: 1,
             }}
           >
             # of Engines
           </Button>
           {sortOrder.attribute !== INITIAL_SORT_STATE.attribute ? (
-            <Button startIcon={<RestartAltRounded />} onClick={resetSortOrder}>
+            <Button
+              startIcon={<RestartAltRounded />}
+              onClick={resetSortOrder}
+              sx={{
+                m: 1,
+              }}
+            >
               Reset Sort Order
             </Button>
           ) : null}
         </Box>
       </Box>
-      <Divider />
       <Box
+        display={'grid'}
+        gap={3}
+        my={1}
         sx={{
-          mt: 3,
-          display: 'grid',
-          gap: 3,
-          gridTemplateColumns: 'repeat(2, 1fr)',
+          gridTemplateColumns: { xs: '1fr', md: 'repeat(2, 1fr)' },
         }}
         data-testid="rocket-info-grid"
       >
         {sortedRockets?.map((rocket) => (
-          <RocketInfo key={rocket.id} rocket={rocket} />
+          <RocketInfo rocket={rocket} key={rocket.id} />
         ))}
       </Box>
     </>

@@ -18,8 +18,8 @@ test('renders Rocket information in a box', () => {
   expect(
     screen.getByText(/^the falcon 1/i, { selector: 'p' })
   ).toBeInTheDocument();
-  const moreInfoLink = screen.getByRole('link', { name: 'More info' });
-  expect(moreInfoLink).toHaveAttribute(
+  const learnMoreLink = screen.getByRole('link', { name: 'Learn more' });
+  expect(learnMoreLink).toHaveAttribute(
     'href',
     'https://en.wikipedia.org/wiki/Falcon_1'
   );
