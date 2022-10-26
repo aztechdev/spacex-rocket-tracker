@@ -1,5 +1,7 @@
 # SpaceX Rocket Tracker
 
+<img src="./docs/screenshot_20221026.png" alt="Screenshot 2022-10-26" width="500px"/>
+
 Rocket information using SpaceX's [public GraphQL API](https://studio.apollographql.com/public/SpaceX-pxxbxen/home?variant=current).
 
 - [Future improvements](./docs/TODO.md)

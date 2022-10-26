@@ -37,13 +37,7 @@ function App() {
   const { loading, error, data } = useQuery<RocketData>(ROCKETS_QUERY);
   return (
     <Container maxWidth={'lg'}>
-      <Typography
-        variant="h1"
-        align="center"
-        gutterBottom={true}
-        mt={1}
-        fontWeight={'700'}
-      >
+      <Typography variant="h1" align="center" mt={1} fontWeight={'700'}>
         SpaceX Rocket Lookup
       </Typography>
       <Box
