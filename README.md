@@ -2,6 +2,8 @@
 
 Rocket information using SpaceX's [public GraphQL API](https://studio.apollographql.com/public/SpaceX-pxxbxen/home?variant=current).
 
+- [Future improvements](./docs/TODO.md)
+
 ## Setup Guide
 
 > Note: this project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
