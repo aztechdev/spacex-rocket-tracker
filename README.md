@@ -47,7 +47,7 @@ To see a code coverage report, you can run:
 npm run test-coverage
 ```
 
-> Note: this is an alias for `npm test -- --coverage`
+> Note: this is an alias for `npm test -- --watchAll=false --coverage`
 
 The coverage report can be opened in the browser:
 

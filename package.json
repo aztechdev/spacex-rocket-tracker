@@ -27,7 +27,14 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "test-coverage": "npm test -- --coverage"
+    "test-coverage": "npm test -- --watchAll=false --coverage"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "!**/src/index.tsx",
+      "!**/src/react-app-env.d.ts",
+      "!**/src/reportWebVitals.ts"
+    ]
   },
   "eslintConfig": {
     "extends": [

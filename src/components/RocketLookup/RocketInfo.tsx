@@ -21,7 +21,7 @@ function RocketInfo({ rocket }: RocketInfoProps) {
   return (
     <Box
       sx={{
-        bgcolor: '#f5f5f5',
+        bgcolor: '#eceff1',
         boxShadow: 1,
         borderRadius: 2,
         p: 2,

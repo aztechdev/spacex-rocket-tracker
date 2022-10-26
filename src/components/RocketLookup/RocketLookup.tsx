@@ -89,6 +89,9 @@ function RocketLookup({ rockets }: RocketLookupProps) {
             label={'Filter Active Rockets'}
             variant={filters.ACTIVE ? 'filled' : 'outlined'}
             onClick={() => updateFilterState(RocketFilter.ACTIVE)}
+            sx={{
+              mx: 1,
+            }}
           />
           <Chip
             icon={<FilterListRounded />}
@@ -96,12 +99,18 @@ function RocketLookup({ rockets }: RocketLookupProps) {
             label={'Filter Merlin Engines'}
             variant={filters.MERLIN_ENGINES ? 'filled' : 'outlined'}
             onClick={() => updateFilterState(RocketFilter.MERLIN_ENGINES)}
+            sx={{
+              mx: 1,
+            }}
           />
           {!isEmpty(filters) ? (
             <Chip
               icon={<FilterListOffRounded />}
               label={'Clear All Filters'}
               onClick={clearFilters}
+              sx={{
+                mx: 1,
+              }}
             />
           ) : null}
         </Box>
@@ -122,6 +131,9 @@ function RocketLookup({ rockets }: RocketLookupProps) {
                 : 'outlined'
             }
             onClick={() => updateSortState(SortAttribute.COST)}
+            sx={{
+              mx: 1,
+            }}
           >
             Cost Per Launch
           </Button>
@@ -141,6 +153,9 @@ function RocketLookup({ rockets }: RocketLookupProps) {
                 : 'outlined'
             }
             onClick={() => updateSortState(SortAttribute.NUMBER_OF_ENGINES)}
+            sx={{
+              mx: 1,
+            }}
           >
             # of Engines
           </Button>
