@@ -2,23 +2,22 @@ import React from 'react';
 import Rocket from '../../types/Rocket';
 import { Box, Chip, Link, Typography } from '@mui/material';
 import OpenInNewRoundedIcon from '@mui/icons-material/OpenInNewRounded';
+import { formatNumberToUSD } from '../../utils';
 
-const USD_CURRENCY_FORMATTER = new Intl.NumberFormat('en-US', {
-  style: 'currency',
-  currency: 'USD',
-});
+interface RocketInfoProps {
+  rocket: Rocket;
+}
 
-const formatNumberToUSD = (cost: number) => USD_CURRENCY_FORMATTER.format(cost);
-
-function RocketInfo({
-  name,
-  active,
-  description,
-  first_flight,
-  cost_per_launch,
-  engines,
-  wikipedia,
-}: Rocket) {
+function RocketInfo({ rocket }: RocketInfoProps) {
+  const {
+    name,
+    active,
+    description,
+    first_flight,
+    cost_per_launch,
+    engines,
+    wikipedia,
+  } = rocket;
   return (
     <Box
       sx={{
@@ -29,6 +28,7 @@ function RocketInfo({
         minWidth: 300,
         position: 'relative',
       }}
+      data-testid="rocket-info"
     >
       <Chip
         label={active ? 'Active' : 'Inactive'}

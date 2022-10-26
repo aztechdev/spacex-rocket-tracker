@@ -159,9 +159,10 @@ function RocketLookup({ rockets }: RocketLookupProps) {
           gap: 3,
           gridTemplateColumns: 'repeat(2, 1fr)',
         }}
+        data-testid="rocket-info-grid"
       >
         {sortedRockets?.map((rocket) => (
-          <RocketInfo key={rocket.id} {...rocket} />
+          <RocketInfo key={rocket.id} rocket={rocket} />
         ))}
       </Box>
     </>

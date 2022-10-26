@@ -48,3 +48,9 @@ npm run test-coverage
 ```
 
 > Note: this is an alias for `npm test -- --coverage`
+
+The coverage report can be opened in the browser:
+
+```zsh
+open coverage/lcov-report/index.html
+```
