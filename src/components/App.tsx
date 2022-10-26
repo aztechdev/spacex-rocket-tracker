@@ -1,6 +1,6 @@
 import React from 'react';
 import { ApolloError, useQuery } from '@apollo/client';
-import { Alert, Box, Container, Typography } from '@mui/material';
+import { Alert, AlertTitle, Box, Container, Typography } from '@mui/material';
 import ROCKETS_QUERY, { RocketData } from '../queries/RocketsQuery';
 import RocketLookup from './RocketLookup/RocketLookup';
 import SpaceXDragon from '../assets/SpaceXDragon.png';
@@ -10,13 +10,25 @@ const renderRocketLookupUI = (
   error: ApolloError | undefined,
   data: RocketData | undefined
 ) => {
-  if (loading) return <Alert severity="info">Loading rocket data...</Alert>;
+  if (loading)
+    return (
+      <Alert severity="info" variant="outlined">
+        <AlertTitle>Ready for liftoff!</AlertTitle>Loading rocket data...
+      </Alert>
+    );
   if (error)
     return (
-      <Alert severity="error">There was an issue fetching rocket data!</Alert>
+      <Alert severity="error" variant="outlined">
+        <AlertTitle>Houston, we've had a problem</AlertTitle>There was an issue
+        fetching rocket data!
+      </Alert>
     );
   if (!data || !data.rockets || data.rockets.length === 0) {
-    return <Alert severity="warning">No rocket data found.</Alert>;
+    return (
+      <Alert severity="warning">
+        <AlertTitle>Lost in space</AlertTitle>No rocket data found.
+      </Alert>
+    );
   }
   return <RocketLookup rockets={data?.rockets} />;
 };
